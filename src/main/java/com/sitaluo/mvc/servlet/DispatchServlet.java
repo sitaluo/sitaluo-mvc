@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -70,14 +71,15 @@ public class DispatchServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
-
-
         System.out.println("doPost..." + requestURI);
         if(requestURI.equals("/index")){
             req.getRequestDispatcher("/index.jsp").forward(req,resp);
         }else {
-            req.getRequestDispatcher("/index.jsp").forward(req,resp);
+            resp.setContentType("text/html");
+            PrintWriter write=resp.getWriter();
+            write.println("<html><head><title>Fist servlet"+
+                    "</title></head><body>"+" hello mvc...");
+            write.println("</body></html>");
         }
 
     }
